@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# Environment
+.env*
+!.env.example
+
+# Private source material (CV, resume, original photos, other personal documents)
+source-docs/
+
+# Logs & OS / editor files
+npm-debug.log*
+.DS_Store
+.vscode/
+.idea/
+.claude/
