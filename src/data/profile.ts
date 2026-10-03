@@ -492,8 +492,11 @@ export const dsa = {
 
 export const resume = {
   pdf: "/resume/Md_Abu_Souyeb_Resume.pdf",
-  preview: "/resume/resume-preview.webp",
-  previewSize: { width: 1076, height: 1521 },
+  images: [
+    { src: "/resume/resume-900.webp", width: 900 },
+    { src: "/resume/resume-1800.webp", width: 1800 },
+  ],
+  aspect: { width: 1800, height: 2546 },
   downloadName: "Md_Abu_Souyeb_Resume.pdf",
 };
 
