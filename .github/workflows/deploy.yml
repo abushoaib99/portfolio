@@ -23,12 +23,16 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - id: pages
+        uses: actions/configure-pages@v5
       - run: npm ci
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: 1
-          # Canonical URL, Open Graph image, sitemap and JSON-LD use this.
-          NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
+          # e.g. "/portfolio" for abushoaib99.github.io/portfolio, "" for a user site or custom domain.
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          # Full public URL; canonical link, Open Graph image, sitemap and JSON-LD use it.
+          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out

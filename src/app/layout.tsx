@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { contact, education, site } from "@/data/profile";
+import { withBase } from "@/lib/paths";
 import "./globals.css";
 
 const plexSans = IBM_Plex_Sans({
@@ -17,6 +18,8 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const ogImage = `${site.url}/og-image.jpg`;
+
 const pageTitle = `${site.name} — ${site.title} · Python, Django & AI/LLM`;
 
 export const metadata: Metadata = {
@@ -24,24 +27,24 @@ export const metadata: Metadata = {
   title: pageTitle,
   description: site.description,
   authors: [{ name: site.name, url: site.url }],
-  alternates: { canonical: "/" },
+  alternates: { canonical: `${site.url}/` },
   openGraph: {
     type: "profile",
-    url: "/",
+    url: `${site.url}/`,
     siteName: site.name,
     title: pageTitle,
     description: site.description,
     firstName: "Md Abu",
     lastName: "Souyeb",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: `${site.name}, ${site.title}` }],
+    images: [{ url: ogImage, width: 1200, height: 630, alt: `${site.name}, ${site.title}` }],
   },
   twitter: {
     card: "summary_large_image",
     title: pageTitle,
     description: site.description,
-    images: ["/og-image.jpg"],
+    images: [ogImage],
   },
-  icons: { icon: "/icon.svg", apple: "/apple-touch-icon.png" },
+  icons: { icon: withBase("/icon.svg"), apple: withBase("/apple-touch-icon.png") },
 };
 
 export const viewport: Viewport = {

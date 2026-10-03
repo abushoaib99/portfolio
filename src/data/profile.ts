@@ -1,4 +1,6 @@
 // Single source of truth for site content.
+import { withBase } from "@/lib/paths";
+
 // Everything here is taken from the resume (source-docs/, not committed) or from code in
 // github.com/abushoaib99. Do not add claims that are not backed by one of those.
 import type { Diagram, DsaTopicGroup, Principle, Project, RepoNote, Role, SkillGroup } from "./types";
@@ -494,10 +496,10 @@ export const dsa = {
 };
 
 export const resume = {
-  pdf: "/resume/Md_Abu_Souyeb_Resume.pdf",
+  pdf: withBase("/resume/Md_Abu_Souyeb_Resume.pdf"),
   images: [
-    { src: "/resume/resume-900.webp", width: 900 },
-    { src: "/resume/resume-1800.webp", width: 1800 },
+    { src: withBase("/resume/resume-900.webp"), width: 900 },
+    { src: withBase("/resume/resume-1800.webp"), width: 1800 },
   ],
   aspect: { width: 1800, height: 2546 },
   downloadName: "Md_Abu_Souyeb_Resume.pdf",

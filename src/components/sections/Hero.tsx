@@ -1,4 +1,5 @@
 import { contact, hero, resume, site, yearsOfExperience } from "@/data/profile";
+import { withBase } from "@/lib/paths";
 import { ArrowDownIcon, DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon } from "../icons";
 
 function CodeCard() {
@@ -89,9 +90,9 @@ export function Hero() {
         <div className="reveal relative mx-auto w-full min-w-0 max-w-sm lg:max-w-none">
           <div className="overflow-hidden rounded-2xl border border-line bg-surface-2">
             <picture>
-              <source srcSet="/abu-souyeb.webp" type="image/webp" />
+              <source srcSet={withBase("/abu-souyeb.webp")} type="image/webp" />
               <img
-                src="/abu-souyeb.jpg"
+                src={withBase("/abu-souyeb.jpg")}
                 alt="Portrait of Md Abu Souyeb"
                 width={640}
                 height={640}
