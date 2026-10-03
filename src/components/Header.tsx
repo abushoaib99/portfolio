@@ -13,6 +13,7 @@ const NAV = [
   { id: "ai", label: "AI / LLM" },
   { id: "github", label: "GitHub" },
   { id: "dsa", label: "DSA" },
+  { id: "resume", label: "Resume" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -53,7 +54,7 @@ export function Header() {
           <span className="text-accent">~/</span>abu-souyeb
         </a>
 
-        <nav aria-label="Primary" className="hidden lg:block">
+        <nav aria-label="Primary" className="hidden xl:block">
           <ul className="flex items-center gap-1">
             {NAV.map((item) => (
               <li key={item.id}>
@@ -73,7 +74,7 @@ export function Header() {
 
         <button
           type="button"
-          className="-mr-2 rounded-md p-2 text-muted hover:text-ink lg:hidden"
+          className="-mr-2 rounded-md p-2 text-muted hover:text-ink xl:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -84,7 +85,7 @@ export function Header() {
       </div>
 
       {open && (
-        <nav id="mobile-nav" aria-label="Primary" className="border-t border-line bg-bg lg:hidden">
+        <nav id="mobile-nav" aria-label="Primary" className="border-t border-line bg-bg xl:hidden">
           <ul className="mx-auto max-w-6xl px-4 py-2 sm:px-6">
             {NAV.map((item) => (
               <li key={item.id}>

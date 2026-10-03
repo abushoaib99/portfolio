@@ -10,6 +10,7 @@ import { Experience } from "@/components/sections/Experience";
 import { Expertise } from "@/components/sections/Expertise";
 import { GitHub } from "@/components/sections/GitHub";
 import { Hero } from "@/components/sections/Hero";
+import { Resume } from "@/components/sections/Resume";
 import { ProblemSolving } from "@/components/sections/ProblemSolving";
 import { Projects } from "@/components/sections/Projects";
 
@@ -28,6 +29,7 @@ export default function Home() {
         <GitHub />
         <ProblemSolving />
         <Education />
+        <Resume />
         <Contact />
       </main>
       <Footer />

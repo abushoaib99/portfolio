@@ -128,12 +128,11 @@ const gh = (repo: string) => ({ kind: "github" as const, repo });
 const innoweb = { kind: "private" as const, org: "Innoweb Limited" };
 const infosapex = { kind: "private" as const, org: "Infosapex Limited" };
 
-// Order matters: featured projects render in exactly this sequence.
+// Order matters: projects render in exactly this sequence.
 export const projects: Project[] = [
   {
     name: "Robo2mation multi-tenant SaaS",
     context: "Innoweb Limited · 2023–present",
-    group: "featured",
     tagline: "Re-architecting a single-tenant workflow platform into multi-tenant SaaS.",
     problem:
       "Robo2mation was deployed as a single-tenant system. Serving more customers that way meant more servers doing the same work.",
@@ -151,22 +150,24 @@ export const projects: Project[] = [
   {
     name: "AI Workflow Generator & RAG Q&A",
     context: "Innoweb Limited · 2023–present",
-    group: "featured",
     tagline: "LLM features inside Robo2mation for faster customer service.",
     problem:
       "Customers needed help building workflows and finding answers in the platform's documentation without waiting on support.",
     details: [
       "AI Workflow Generator that produces workflows on the platform, reducing manual setup.",
-      "RAG-based Q&A that answers questions using retrieved product documentation.",
-      "My public langchain_python project shows the same retrieval approach, built over the platform's admin manuals.",
+      "RAG-based Q&A that answers customer questions from retrieved product documentation.",
+      "Built so customer service is faster and more automated, without waiting on the support team.",
+      "Knowledge base built from the platform's DMS and workflow admin manuals.",
+      "Public prototype retrieval pipeline: PDF chunks (1,000 characters, 200 overlap) → MiniLM embeddings → FAISS, with LLM-based contextual compression.",
+      "In the prototype, the support assistant answers only from retrieved context and refers users to support when the answer isn't there.",
     ],
-    stack: ["Python", "LLMs", "RAG", "Prompt engineering"],
+    stack: ["Python", "LLMs", "RAG", "Prompt engineering", "FAISS", "Embeddings"],
     source: innoweb,
+    extraLinks: [{ label: "RAG prototype", href: "https://github.com/abushoaib99/langchain_python" }],
   },
   {
     name: "No-code integration platform",
     context: "Innoweb Limited · 2023–present",
-    group: "featured",
     tagline: "Lets teams configure integrations, data tables and form logic without writing code.",
     problem: "Every customer integration, custom table and form rule had needed developer time.",
     details: [
@@ -181,7 +182,6 @@ export const projects: Project[] = [
   // TODO(details needed): Boineer — what it is, your role, features, stack, live link.
   {
     name: "Boineer",
-    group: "featured",
     draft: true,
     tagline: "",
     problem: "",
@@ -192,7 +192,6 @@ export const projects: Project[] = [
   // TODO(details needed): Edusoft (web) — what it is, your role, features, stack.
   {
     name: "Edusoft",
-    group: "featured",
     draft: true,
     tagline: "",
     problem: "",
@@ -203,7 +202,6 @@ export const projects: Project[] = [
   {
     name: "Robo2mation mobile app",
     context: "Innoweb Limited · 2020–2023",
-    group: "featured",
     tagline: "Android and iOS app for the Robo2mation process-flow and document platform.",
     problem: "Robo2mation's workflow and document features needed to be available on phones, not only in the web app.",
     details: [
@@ -218,7 +216,6 @@ export const projects: Project[] = [
   // TODO(details needed): Edusoft mobile app — platforms, features, stack, store links.
   {
     name: "Edusoft mobile app",
-    group: "featured",
     draft: true,
     tagline: "",
     problem: "",
@@ -229,7 +226,6 @@ export const projects: Project[] = [
   {
     name: "Currency input mask",
     context: "Library for Robo2mation workflow eForms",
-    group: "featured",
     tagline: "A small jQuery library that turns any input into a live-formatted currency field.",
     problem:
       "Amount fields in workflow eForms must always hold a valid value — thousands separators and exactly two decimals — while the user types, on desktop keyboards and Android virtual keyboards alike.",
@@ -244,9 +240,22 @@ export const projects: Project[] = [
     source: gh("currency_input_mask"),
   },
   {
+    name: "amarroom.com app & property management system",
+    context: "Infosapex Limited · 2019–2020",
+    tagline: "Flight booking and payments on mobile, plus the API behind a property management system.",
+    problem: "A travel booking app and a property management system (PMS) needed mobile features and a secure API.",
+    details: [
+      "Built flight booking and payment gateway features for the amarroom.com Android and iOS app in Flutter.",
+      "Built the REST APIs for the PMS mobile app with Django REST Framework.",
+      "Implemented token-based authorization with JWT for the PMS mobile app.",
+      "Built key features of the PMS web app.",
+    ],
+    stack: ["Flutter", "Dart", "Python", "Django REST Framework", "JWT"],
+    source: infosapex,
+  },
+  {
     name: "LangGraph eForm auto-fill",
     context: "Personal project · 2025",
-    group: "more",
     tagline: "Turns a plain-language request into a filled BPMN eForm.",
     problem:
       "Workflow eForms such as purchase requisitions have many fields, grids and option lists. Filling them by hand is slow and error-prone.",
@@ -262,7 +271,6 @@ export const projects: Project[] = [
   {
     name: "Google Calendar MCP server",
     context: "Personal project · 2026",
-    group: "more",
     tagline: "Gives AI clients like Cursor access to your own Google Calendar through the Model Context Protocol.",
     problem:
       "LLM assistants can't see your schedule. MCP gives them a typed tool to call, but the server still has to handle OAuth safely for each user.",
@@ -276,24 +284,8 @@ export const projects: Project[] = [
     source: gh("google_calendar_mcp_server_python"),
   },
   {
-    name: "amarroom.com app & property management system",
-    context: "Infosapex Limited · 2019–2020",
-    group: "more",
-    tagline: "Flight booking and payments on mobile, plus the API behind a property management system.",
-    problem: "A travel booking app and a property management system (PMS) needed mobile features and a secure API.",
-    details: [
-      "Built flight booking and payment gateway features for the amarroom.com Android and iOS app in Flutter.",
-      "Built the REST APIs for the PMS mobile app with Django REST Framework.",
-      "Implemented token-based authorization with JWT for the PMS mobile app.",
-      "Built key features of the PMS web app.",
-    ],
-    stack: ["Flutter", "Dart", "Python", "Django REST Framework", "JWT"],
-    source: infosapex,
-  },
-  {
     name: "Isolated tenant stacks",
     context: "Personal project · 2025",
-    group: "more",
     tagline: "Prototype of silo-style tenancy: one container stack per tenant, routed by hostname.",
     problem:
       "Some tenants need hard isolation of compute, database and storage, which a shared multi-tenant deployment cannot give them.",
@@ -496,6 +488,13 @@ export const dsa = {
       items: ["Nim & Misère Nim", "Impartial games", "Sorting algorithms"],
     },
   ] satisfies DsaTopicGroup[],
+};
+
+export const resume = {
+  pdf: "/resume/Md_Abu_Souyeb_Resume.pdf",
+  preview: "/resume/resume-preview.webp",
+  previewSize: { width: 1076, height: 1521 },
+  downloadName: "Md_Abu_Souyeb_Resume.pdf",
 };
 
 export const education = {

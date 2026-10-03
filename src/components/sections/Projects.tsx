@@ -85,8 +85,6 @@ function ProjectCard({ project, number }: { project: Project; number: number }) 
 
 export function Projects() {
   const visible = projects.filter((p) => !p.draft);
-  const featured = visible.filter((p) => p.group === "featured");
-  const more = visible.filter((p) => p.group === "more");
 
   return (
     <Section
@@ -97,23 +95,10 @@ export function Projects() {
       intro="Professional work, where the code is private, alongside open-source projects you can read. Each card says which it is."
     >
       <div className="grid gap-5 md:grid-cols-2">
-        {featured.map((p, i) => (
+        {visible.map((p, i) => (
           <ProjectCard key={p.name} project={p} number={i + 1} />
         ))}
       </div>
-
-      {more.length > 0 && (
-        <>
-          <h3 className="reveal mb-6 mt-16 font-mono text-sm text-muted">
-            <span className="text-accent">#</span> Other projects
-          </h3>
-          <div className="grid gap-5 md:grid-cols-2">
-            {more.map((p, i) => (
-              <ProjectCard key={p.name} project={p} number={featured.length + i + 1} />
-            ))}
-          </div>
-        </>
-      )}
     </Section>
   );
 }
