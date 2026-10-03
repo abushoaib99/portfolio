@@ -9,8 +9,9 @@ const REPOS = [
   "langchain_python",
   "multitenant_docker_isolation",
   "create-dynamic-nginx-conf",
+  "currency_input_mask",
+  "My-Programming",
   "doc_to_md",
-  "s3_bucket_integration_with_python",
   "graphene-elastic",
 ];
 

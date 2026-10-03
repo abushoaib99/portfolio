@@ -26,6 +26,12 @@ export type ProjectSource =
 
 export interface Project {
   name: string;
+  /** Where/when the work happened, e.g. "Innoweb Limited · 2020–2023". */
+  context?: string;
+  /** "featured" projects render first, in array order; "more" render after a sub-heading. */
+  group: "featured" | "more";
+  /** Drafts are kept in the data but not rendered until their details are confirmed. */
+  draft?: boolean;
   tagline: string;
   problem: string;
   details: string[];
@@ -71,4 +77,9 @@ export interface GithubSnapshot {
     fork: boolean;
     pushedAt: string;
   }[];
+}
+
+export interface DsaTopicGroup {
+  title: string;
+  items: string[];
 }

@@ -13,7 +13,7 @@ export function Contact() {
   return (
     <Section
       id="contact"
-      index="09"
+      index="10"
       eyebrow="Contact"
       title="Let's talk"
       intro="I'm open to conversations about backend, architecture and AI/LLM engineering roles. Email is the best way to reach me."

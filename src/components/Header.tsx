@@ -12,6 +12,7 @@ const NAV = [
   { id: "architecture", label: "Architecture" },
   { id: "ai", label: "AI / LLM" },
   { id: "github", label: "GitHub" },
+  { id: "dsa", label: "DSA" },
   { id: "contact", label: "Contact" },
 ];
 

@@ -24,7 +24,7 @@ function SourceBadge({ project }: { project: Project }) {
   );
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project, number }: { project: Project; number: number }) {
   const links = [
     ...(project.source.kind === "github"
       ? [{ label: "View repository", href: `${contact.github}/${project.source.repo}` }]
@@ -34,9 +34,15 @@ function ProjectCard({ project }: { project: Project }) {
 
   return (
     <article className="reveal group flex flex-col rounded-xl border border-line bg-surface p-6 transition-colors hover:border-line-strong sm:p-7">
-      <SourceBadge project={project} />
+      <div className="flex items-start justify-between gap-4">
+        <SourceBadge project={project} />
+        <span aria-hidden className="font-mono text-xs text-faint">
+          {String(number).padStart(2, "0")}
+        </span>
+      </div>
       <h3 className="mt-4 text-xl font-semibold tracking-tight">{project.name}</h3>
-      <p className="mt-1.5 text-muted">{project.tagline}</p>
+      {project.context && <p className="mt-1 font-mono text-xs text-faint">{project.context}</p>}
+      <p className="mt-2 text-muted">{project.tagline}</p>
 
       <div className="mt-5 rounded-lg bg-surface-2 px-4 py-3">
         <p className="font-mono text-[11px] uppercase tracking-wider text-faint">Problem</p>
@@ -78,19 +84,36 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export function Projects() {
+  const visible = projects.filter((p) => !p.draft);
+  const featured = visible.filter((p) => p.group === "featured");
+  const more = visible.filter((p) => p.group === "more");
+
   return (
     <Section
       id="projects"
       index="04"
       eyebrow="Featured projects"
       title="Selected work"
-      intro="Professional work on Robo2mation, where the code is private, alongside open-source projects you can read. Each card says which it is."
+      intro="Professional work, where the code is private, alongside open-source projects you can read. Each card says which it is."
     >
       <div className="grid gap-5 md:grid-cols-2">
-        {projects.map((p) => (
-          <ProjectCard key={p.name} project={p} />
+        {featured.map((p, i) => (
+          <ProjectCard key={p.name} project={p} number={i + 1} />
         ))}
       </div>
+
+      {more.length > 0 && (
+        <>
+          <h3 className="reveal mb-6 mt-16 font-mono text-sm text-muted">
+            <span className="text-accent">#</span> Other projects
+          </h3>
+          <div className="grid gap-5 md:grid-cols-2">
+            {more.map((p, i) => (
+              <ProjectCard key={p.name} project={p} number={featured.length + i + 1} />
+            ))}
+          </div>
+        </>
+      )}
     </Section>
   );
 }

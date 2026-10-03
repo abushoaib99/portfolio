@@ -1,7 +1,7 @@
 // Single source of truth for site content.
 // Everything here is taken from the resume (source-docs/, not committed) or from code in
 // github.com/abushoaib99. Do not add claims that are not backed by one of those.
-import type { Diagram, Principle, Project, RepoNote, Role, SkillGroup } from "./types";
+import type { Diagram, DsaTopicGroup, Principle, Project, RepoNote, Role, SkillGroup } from "./types";
 
 export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
@@ -67,7 +67,7 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Frontend & Mobile",
     summary: "Clients for the APIs I build",
-    items: ["JavaScript", "React", "Flutter", "Dart", "Push notifications"],
+    items: ["JavaScript", "jQuery", "React", "Flutter", "Dart", "Firebase", "Push notifications"],
   },
 ];
 
@@ -126,25 +126,127 @@ export const roles: Role[] = [
 
 const gh = (repo: string) => ({ kind: "github" as const, repo });
 const innoweb = { kind: "private" as const, org: "Innoweb Limited" };
+const infosapex = { kind: "private" as const, org: "Infosapex Limited" };
 
+// Order matters: featured projects render in exactly this sequence.
 export const projects: Project[] = [
   {
     name: "Robo2mation multi-tenant SaaS",
+    context: "Innoweb Limited · 2023–present",
+    group: "featured",
     tagline: "Re-architecting a single-tenant workflow platform into multi-tenant SaaS.",
     problem:
       "Robo2mation was deployed as a single-tenant system. Serving more customers that way meant more servers doing the same work.",
     details: [
       "Redesigned the architecture for multi-tenancy, improving resource efficiency by 60–70%.",
       "Upgraded the database and Elasticsearch layers to keep tenants secure and search fast.",
-      "Added database replication for failover, and sized servers for high- and low-load profiles.",
+      "Added database replication for failover, and calculated server specifications (RAM, CPU, storage and cost) for high- and low-load profiles.",
       "Automated per-tenant subdomains: a script renders an Nginx server block from a template, enables it and reloads Nginx.",
+      "Shipped in Docker containers through a Jenkins CI/CD pipeline.",
     ],
-    stack: ["Django", "PostgreSQL", "Elasticsearch", "Nginx", "Gunicorn", "Docker"],
+    stack: ["Python", "Django", "DRF", "PostgreSQL", "Elasticsearch", "Nginx", "Gunicorn", "Docker", "Jenkins"],
     source: innoweb,
     extraLinks: [{ label: "Nginx provisioning script", href: "https://github.com/abushoaib99/create-dynamic-nginx-conf" }],
   },
   {
+    name: "AI Workflow Generator & RAG Q&A",
+    context: "Innoweb Limited · 2023–present",
+    group: "featured",
+    tagline: "LLM features inside Robo2mation for faster customer service.",
+    problem:
+      "Customers needed help building workflows and finding answers in the platform's documentation without waiting on support.",
+    details: [
+      "AI Workflow Generator that produces workflows on the platform, reducing manual setup.",
+      "RAG-based Q&A that answers questions using retrieved product documentation.",
+      "My public langchain_python project shows the same retrieval approach, built over the platform's admin manuals.",
+    ],
+    stack: ["Python", "LLMs", "RAG", "Prompt engineering"],
+    source: innoweb,
+  },
+  {
+    name: "No-code integration platform",
+    context: "Innoweb Limited · 2023–present",
+    group: "featured",
+    tagline: "Lets teams configure integrations, data tables and form logic without writing code.",
+    problem: "Every customer integration, custom table and form rule had needed developer time.",
+    details: [
+      "Third-party API integration system configured from the UI.",
+      "Master Tables: user-defined dynamic tables that workflows can use.",
+      "Dynamic eForm condition builder for form logic.",
+      "Reduced development time by 15–20%.",
+    ],
+    stack: ["Python", "Django", "DRF", "JavaScript", "PostgreSQL"],
+    source: innoweb,
+  },
+  // TODO(details needed): Boineer — what it is, your role, features, stack, live link.
+  {
+    name: "Boineer",
+    group: "featured",
+    draft: true,
+    tagline: "",
+    problem: "",
+    details: [],
+    stack: [],
+    source: { kind: "private", org: "" },
+  },
+  // TODO(details needed): Edusoft (web) — what it is, your role, features, stack.
+  {
+    name: "Edusoft",
+    group: "featured",
+    draft: true,
+    tagline: "",
+    problem: "",
+    details: [],
+    stack: [],
+    source: { kind: "private", org: "" },
+  },
+  {
+    name: "Robo2mation mobile app",
+    context: "Innoweb Limited · 2020–2023",
+    group: "featured",
+    tagline: "Android and iOS app for the Robo2mation process-flow and document platform.",
+    problem: "Robo2mation's workflow and document features needed to be available on phones, not only in the web app.",
+    details: [
+      "Built in Flutter from one codebase for Android and iOS, and published to Google Play and the App Store.",
+      "Push notifications through Firebase Cloud Messaging.",
+      "Firebase Remote Config, so app configuration can change without shipping a new release.",
+      "Runs on the platform's Django REST Framework APIs.",
+    ],
+    stack: ["Flutter", "Dart", "Firebase Cloud Messaging", "Firebase Remote Config", "Django REST Framework"],
+    source: innoweb,
+  },
+  // TODO(details needed): Edusoft mobile app — platforms, features, stack, store links.
+  {
+    name: "Edusoft mobile app",
+    group: "featured",
+    draft: true,
+    tagline: "",
+    problem: "",
+    details: [],
+    stack: [],
+    source: { kind: "private", org: "" },
+  },
+  {
+    name: "Currency input mask",
+    context: "Library for Robo2mation workflow eForms",
+    group: "featured",
+    tagline: "A small jQuery library that turns any input into a live-formatted currency field.",
+    problem:
+      "Amount fields in workflow eForms must always hold a valid value — thousands separators and exactly two decimals — while the user types, on desktop keyboards and Android virtual keyboards alike.",
+    details: [
+      "One call — makeAmountField($('input[type=amount]')) — turns fields into right-aligned amount inputs that always hold a value such as 1,234,567.00.",
+      "Reformats on every keystroke with thousands separators and a fixed two-digit decimal part, and caps the integer part at 12 digits.",
+      "Keeps the caret where the user expects: recalculates its position as commas appear or disappear, jumps to the decimal point on '.', and overwrites decimal digits in place.",
+      "Separate code paths for desktop keydown events and Android virtual keyboards, which don't report Backspace and '.' the same way.",
+      "Blocks paste, cut, long-press repeats and partial-selection deletes that could leave an invalid value, while still allowing Ctrl+C and Ctrl+A.",
+    ],
+    stack: ["JavaScript", "jQuery", "DOM selection API", "Mobile input handling"],
+    source: gh("currency_input_mask"),
+  },
+  {
     name: "LangGraph eForm auto-fill",
+    context: "Personal project · 2025",
+    group: "more",
     tagline: "Turns a plain-language request into a filled BPMN eForm.",
     problem:
       "Workflow eForms such as purchase requisitions have many fields, grids and option lists. Filling them by hand is slow and error-prone.",
@@ -154,24 +256,13 @@ export const projects: Project[] = [
       "Gemini runs at temperature 0 in JSON mode, mapping values onto field IDs and choosing only from the allowed options.",
       "Required fields the model could not fill are collected and asked of the user instead of being guessed.",
     ],
-    stack: ["LangGraph", "LangChain", "Gemini", "PostgreSQL", "Python"],
+    stack: ["Python", "LangGraph", "LangChain", "Gemini", "PostgreSQL"],
     source: gh("langgraph_python"),
   },
   {
-    name: "AI Workflow Generator & RAG Q&A",
-    tagline: "LLM features inside Robo2mation for faster customer service.",
-    problem:
-      "Customers needed help building workflows and finding answers in the platform's documentation without waiting on support.",
-    details: [
-      "AI Workflow Generator that produces workflows on the platform, reducing manual setup.",
-      "RAG-based Q&A that answers questions using retrieved product documentation.",
-      "My public langchain_python project shows the same retrieval approach, built over the platform's admin manuals.",
-    ],
-    stack: ["LLMs", "RAG", "Prompt engineering", "Python"],
-    source: innoweb,
-  },
-  {
     name: "Google Calendar MCP server",
+    context: "Personal project · 2026",
+    group: "more",
     tagline: "Gives AI clients like Cursor access to your own Google Calendar through the Model Context Protocol.",
     problem:
       "LLM assistants can't see your schedule. MCP gives them a typed tool to call, but the server still has to handle OAuth safely for each user.",
@@ -185,21 +276,24 @@ export const projects: Project[] = [
     source: gh("google_calendar_mcp_server_python"),
   },
   {
-    name: "No-code integration platform",
-    tagline: "Lets teams configure integrations, data tables and form logic without writing code.",
-    problem:
-      "Every customer integration, custom table and form rule had needed developer time.",
+    name: "amarroom.com app & property management system",
+    context: "Infosapex Limited · 2019–2020",
+    group: "more",
+    tagline: "Flight booking and payments on mobile, plus the API behind a property management system.",
+    problem: "A travel booking app and a property management system (PMS) needed mobile features and a secure API.",
     details: [
-      "Third-party API integration system configured from the UI.",
-      "Master Tables: user-defined dynamic tables that workflows can use.",
-      "Dynamic eForm condition builder for form logic.",
-      "Reduced development time by 15–20%.",
+      "Built flight booking and payment gateway features for the amarroom.com Android and iOS app in Flutter.",
+      "Built the REST APIs for the PMS mobile app with Django REST Framework.",
+      "Implemented token-based authorization with JWT for the PMS mobile app.",
+      "Built key features of the PMS web app.",
     ],
-    stack: ["Django", "DRF", "JavaScript", "PostgreSQL"],
-    source: innoweb,
+    stack: ["Flutter", "Dart", "Python", "Django REST Framework", "JWT"],
+    source: infosapex,
   },
   {
     name: "Isolated tenant stacks",
+    context: "Personal project · 2025",
+    group: "more",
     tagline: "Prototype of silo-style tenancy: one container stack per tenant, routed by hostname.",
     problem:
       "Some tenants need hard isolation of compute, database and storage, which a shared multi-tenant deployment cannot give them.",
@@ -208,7 +302,7 @@ export const projects: Project[] = [
       "Traefik discovers containers through Docker labels and routes each tenant's hostname to its own stack.",
       "Design document covers a per-tenant Django app, PostgreSQL with its own volume, optional Redis, and environment-based settings.",
     ],
-    stack: ["Docker Compose", "Traefik", "Jinja2", "Python", "PostgreSQL"],
+    stack: ["Python", "Docker Compose", "Traefik", "Jinja2", "PostgreSQL"],
     source: gh("multitenant_docker_isolation"),
     badge: "Prototype",
   },
@@ -352,14 +446,19 @@ export const repoNotes: RepoNote[] = [
     topics: ["Nginx", "Automation"],
   },
   {
+    name: "currency_input_mask",
+    summary: "jQuery library for live-formatted currency inputs with caret-aware editing and Android keyboard handling, used for workflow eForm amount fields.",
+    topics: ["JavaScript", "jQuery"],
+  },
+  {
+    name: "My-Programming",
+    summary: "Competitive-programming solutions and implementations of the classic algorithms: graphs, DP, segment trees, game theory and more.",
+    topics: ["C++", "DSA"],
+  },
+  {
     name: "doc_to_md",
     summary: "Desktop batch converter (Tkinter + MarkItDown) that turns PDF, Office and image files into Markdown, for example to prepare documents for LLMs.",
     topics: ["MarkItDown", "Tooling"],
-  },
-  {
-    name: "s3_bucket_integration_with_python",
-    summary: "boto3 wrapper for S3 uploads and pre-signed URLs, with credentials loaded from the environment.",
-    topics: ["AWS S3", "boto3"],
   },
   {
     name: "graphene-elastic",
@@ -368,11 +467,36 @@ export const repoNotes: RepoNote[] = [
   },
 ];
 
-export const problemSolving = [
-  { platform: "LeetCode & GeeksforGeeks", count: "450+", href: "https://leetcode.com/abushoaib/" },
-  { platform: "Codeforces", count: "250+", href: "https://codeforces.com/profile/AbuShoaib" },
-  { platform: "UVa Online Judge", count: "100+", href: "https://uhunt.onlinejudge.org/id/752162" },
-];
+export const dsa = {
+  intro:
+    "I've practised competitive programming since university, mostly in C and C++. My solutions and implementations of the classic algorithms are in a public repository.",
+  platforms: [
+    { platform: "LeetCode & GeeksforGeeks", count: "450+", href: "https://leetcode.com/abushoaib/" },
+    { platform: "Codeforces", count: "250+", href: "https://codeforces.com/profile/AbuShoaib" },
+    { platform: "UVa Online Judge", count: "100+", href: "https://uhunt.onlinejudge.org/id/752162" },
+  ],
+  alsoPractised: ["LightOJ", "SPOJ", "CodeMarshal"],
+  languages: ["C", "C++", "Java"],
+  repo: "https://github.com/abushoaib99/My-Programming",
+  topics: [
+    {
+      title: "Graphs",
+      items: ["BFS / DFS", "Dijkstra", "Bellman-Ford", "Floyd-Warshall", "Kruskal & Prim (MST)", "Disjoint set union", "Strongly connected components", "Articulation points", "Maximum flow", "Minimum vertex cover", "Travelling salesperson"],
+    },
+    {
+      title: "Dynamic programming",
+      items: ["0/1 knapsack", "Coin change", "LIS", "Longest common subsequence", "Longest common substring", "Maximum subarray", "Bitmask DP"],
+    },
+    {
+      title: "Data structures",
+      items: ["Segment tree", "Lazy propagation", "Binary indexed tree", "Lowest common ancestor", "Binary trees", "Linked list, stack, queue"],
+    },
+    {
+      title: "Game theory & more",
+      items: ["Nim & Misère Nim", "Impartial games", "Sorting algorithms"],
+    },
+  ] satisfies DsaTopicGroup[],
+};
 
 export const education = {
   degree: "B.Sc. in Computer Science & Engineering",

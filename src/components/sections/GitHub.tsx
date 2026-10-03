@@ -25,9 +25,9 @@ export function GitHub() {
       index="07"
       eyebrow="GitHub"
       title="Selected repositories"
-      intro="Repositories where I try out architecture and AI ideas before using them at work. Older coursework and tutorial repositories are left out."
+      intro="Public repositories, from algorithm practice to architecture and AI experiments I try before using the ideas at work. Older coursework and tutorial repositories are left out."
     >
-      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {repos.map((repo) => (
           <li key={repo.name} className="reveal">
             <a

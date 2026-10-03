@@ -1,7 +1,7 @@
 {
   "user": "abushoaib99",
   "profileUrl": "https://github.com/abushoaib99",
-  "syncedAt": "2026-10-03T18:13:36.878Z",
+  "syncedAt": "2026-10-03T18:58:07.989Z",
   "repos": [
     {
       "name": "google_calendar_mcp_server_python",
@@ -54,6 +54,26 @@
       "pushedAt": "2024-04-22T04:21:47Z"
     },
     {
+      "name": "currency_input_mask",
+      "url": "https://github.com/abushoaib99/currency_input_mask",
+      "description": "Currency Input Mask With 2 decimal point and thousand separated",
+      "language": "JavaScript",
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "pushedAt": "2024-06-02T06:13:36Z"
+    },
+    {
+      "name": "My-Programming",
+      "url": "https://github.com/abushoaib99/My-Programming",
+      "description": null,
+      "language": "C++",
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "pushedAt": "2022-07-25T14:12:42Z"
+    },
+    {
       "name": "doc_to_md",
       "url": "https://github.com/abushoaib99/doc_to_md",
       "description": null,
@@ -62,16 +82,6 @@
       "forks": 0,
       "fork": false,
       "pushedAt": "2026-09-18T07:28:00Z"
-    },
-    {
-      "name": "s3_bucket_integration_with_python",
-      "url": "https://github.com/abushoaib99/s3_bucket_integration_with_python",
-      "description": null,
-      "language": "Python",
-      "stars": 0,
-      "forks": 0,
-      "fork": false,
-      "pushedAt": "2024-03-18T13:56:24Z"
     },
     {
       "name": "graphene-elastic",
