@@ -12,6 +12,10 @@ function SourceBadge({ project }: { project: Project }) {
         <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-0.5 text-faint">
           <LockIcon width={12} height={12} /> Professional · {source.org}
         </span>
+      ) : source.kind === "personal" ? (
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-0.5 text-faint">
+          <LockIcon width={12} height={12} /> Personal · Private code
+        </span>
       ) : (
         <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-0.5 text-faint">
           <GitHubIcon width={12} height={12} /> Open source

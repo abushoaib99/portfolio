@@ -22,7 +22,9 @@ export interface Role {
 
 export type ProjectSource =
   | { kind: "github"; repo: string }
-  | { kind: "private"; org: string };
+  | { kind: "private"; org: string }
+  /** Personal project whose repositories are private. */
+  | { kind: "personal" };
 
 export interface Project {
   name: string;
