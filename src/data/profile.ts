@@ -8,10 +8,10 @@ import type { Diagram, DsaTopicGroup, Principle, Project, RepoNote, Role, SkillG
 export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   name: "Md Abu Souyeb",
-  alternateName: "Abu Shoaib",
+  alternateName: "Md Abu Souyeb",
   title: "Senior Software Engineer",
   description:
-    "Md Abu Souyeb (Abu Shoaib) is a Senior Software Engineer in Dhaka, Bangladesh, focused on Python and Django backends, multi-tenant SaaS architecture, and LLM applications with LangChain and LangGraph.",
+    "Md Abu Souyeb (Abu Souyeb) is a Senior Software Engineer in Dhaka, Bangladesh, focused on Python and Django backends, multi-tenant SaaS architecture, and LLM applications with LangChain and LangGraph.",
   location: "Dhaka, Bangladesh",
   careerStart: "2019-09",
 };
